@@ -1,7 +1,7 @@
 
 import json
-import students
-class student_details(students.student):
+from file_class import file
+class student_details(file):
     def __init__(self):
         pass
 
@@ -33,8 +33,11 @@ class student_details(students.student):
         initial_count = len(data)
         data = [s for s in data if s["Roll"] != roll]
         if len(data) < initial_count:
-            with open(filename, 'w') as file:
-                json.dump(data, file, indent=4)
+            user_input = input(f"Are you sure you want to remove student with roll {roll}? (y/n): ")
+            if user_input.lower() == 'n':
+                print("Operation cancelled.")
+                return
+            self.save_file(data, filename)
             print(f"Student with roll {roll} removed successfully!")
         else:
             print(f"No student found with roll {roll}")

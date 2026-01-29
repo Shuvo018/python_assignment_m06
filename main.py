@@ -3,14 +3,11 @@ import os
 from datetime import datetime
 from students import student
 from student_details import student_details
+from file_class import file
 
 JSON_FILE = "student_records.json"
 
-def create_json_file():
-    if not os.path.exists(JSON_FILE):
-        with open(JSON_FILE, 'w') as file:
-            json.dump([], file, indent=5)
-            
+    
 def menu():
     print("\n" + "="*8 + " MENU " + "="*8)
     print("1. Add Student")
@@ -36,7 +33,9 @@ def menu():
 
 def main():
     # Create JSON file on startup
-    create_json_file()
+    file_handler = file()
+    file_handler.create_json_file()
+    
     
     while True:
         choice = menu()
@@ -74,7 +73,7 @@ def main():
             std_details.search_student(roll, JSON_FILE)
         
         elif choice == 4:
-            # remove_student(name)
+            # remove_student
             try:
                 roll = int(input("Enter student roll to remove: "))
             except ValueError:

@@ -1,5 +1,6 @@
 import json
-class student:
+from file_class import file
+class student(file):
     def __init__(self, name, roll, email, department):
         self.name = name
         self.roll = roll
@@ -12,10 +13,11 @@ class student:
                 "Department": self.department}
     
     def setStudentInfo(self, name, roll, email, department):
-        self.name = name
-        self.roll = roll
-        self.email = email
-        self.department = department
+        pass
+        # self.name = name
+        # self.roll = roll
+        # self.email = email
+        # self.department = department
 
         # self.add_student(JSON_FILE)
 
@@ -24,17 +26,16 @@ class student:
         data = self.load_file(filename)
         
         student = self.getStudentInfo()
-        
+        stu_exist = [s for s in data if s["Roll"] == student['Roll']]
+        if stu_exist:
+            print(f"Error: Roll number {student['Roll']} already exists for another student. ")
+            return
         data.append(student)
         #Save students to JSON file
-        with open(filename, 'w') as file:
-            json.dump(data, file, indent=4)
+        self.save_file(data, filename)
         print(f"New student added successfully!")
 
-    def load_file(self, filename):
-        with open(filename, 'r') as file:
-            return json.load(file)
-        return []
+
         
 
 
