@@ -23,6 +23,7 @@ def menu():
         user_input = int(input("Enter your choice: "))
     except Exception as e:
         print("Please enter integer digit. e.g: 1,2,3...")
+        return -1
         
     
     if user_input < 1 or user_input > 5:
@@ -36,12 +37,10 @@ def menu():
 def main():
     # Create JSON file on startup
     file_handler = file()
-    file_handler.create_json_file()
-    
+    file_handler.create_json_file(JSON_FILE)
     
     while True:
         choice = menu()
-        
         if choice == 1:
             try:
                 name = input("Enter student name: ")
@@ -56,29 +55,29 @@ def main():
                 print("All fields are required")
                 continue
             if name.isdigit():
-                print("Name cannot be numeric. Please try again.")
+                print("Student name must be a string.")
                 continue
             if len(name) > 25:
-                print("Name is too long. Please try again.")
+                print("Name is too long. Please write a short name (max 25 characters).")
                 continue
 
 
             if roll < 0:
-                print("Roll number cannot be negative. Please try again.")
+                print("Roll number cannot be negative. ")
                 continue
-            if roll > 99999:
-                print("Roll number is too large. Please try again.")
+            if roll > 100000:
+                print("Roll number is too large.")
                 continue
             pattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
             if not re.match(pattern, email):
-                print("Invalid email format. Please try again.")
+                print("Invalid email format.")
                 continue
             
             if dept.isdigit():
-                print("Department cannot be numeric. Please try again.")
+                print("Department must be a string.")
                 continue
             if len(dept) > 35:
-                print("Department name is too long. Please try again.")
+                print("Department name is too long.")
                 continue
             
             std = student(name, roll, email, dept)
@@ -113,10 +112,10 @@ def main():
                 print("Please enter a valid roll number.")
                 continue
             if roll < 0:
-                print("Roll number cannot be negative. Please try again.")
+                print("Roll number cannot be negative.")
                 continue
-            if roll > 99999:
-                print("Roll number is too large. Please try again.")
+            if roll > 100000:
+                print("Roll number is too large.")
                 continue
             
             std_details = student_details()
