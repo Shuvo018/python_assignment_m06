@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Student Management System</title>
-</head>
 <body>
-
 <h1>Step 1. MENU</h1>
 
 <p><b>Show:</b></p>
@@ -113,4 +106,3 @@ Student with roll 22 removed successfully!
 </pre>
 
 </body>
-</html>
