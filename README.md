@@ -1,11 +1,11 @@
 <h1>Step 1. MENU </h1>
-Show:
-======== MENU ========
-1. Add Student
-2. View Students
-3. Search Student
-4. Remove Student
-5. Exit
+Show:<br>
+======== MENU ========<br>
+1. Add Student<br>
+2. View Students<br>
+3. Search Student<br>
+4. Remove Student<br>
+5. Exit<br>
 
 <b>Error handling: </b>
 1. ValueError for correct user input value
