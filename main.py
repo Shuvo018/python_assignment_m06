@@ -4,6 +4,7 @@ from datetime import datetime
 from students import student
 from student_details import student_details
 from file_class import file
+import re
 
 JSON_FILE = "student_records.json"
 
@@ -16,18 +17,19 @@ def menu():
     print("4. Remove Student")
     print("5. Exit")
 
+
     user_input = -1
     try:
         user_input = int(input("Enter your choice: "))
     except Exception as e:
         print("Please enter integer digit. e.g: 1,2,3...")
-        return menu()
+        
     
     if user_input < 1 or user_input > 5:
         print("Please enter number from menu 1 to 5")
-        return menu()
-    
-    return user_input
+    elif user_input > 0 and user_input < 6:
+        return user_input
+    return -1
 
 
 
@@ -49,12 +51,37 @@ def main():
             except ValueError:
                 print("Invalid input. Please try again.")
                 continue
+            # Error handling
             if not name or not roll or not email or not dept:
                 print("All fields are required")
                 continue
+            if name.isdigit():
+                print("Name cannot be numeric. Please try again.")
+                continue
+            if len(name) > 25:
+                print("Name is too long. Please try again.")
+                continue
 
+
+            if roll < 0:
+                print("Roll number cannot be negative. Please try again.")
+                continue
+            if roll > 99999:
+                print("Roll number is too large. Please try again.")
+                continue
+            pattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+            if not re.match(pattern, email):
+                print("Invalid email format. Please try again.")
+                continue
+            
+            if dept.isdigit():
+                print("Department cannot be numeric. Please try again.")
+                continue
+            if len(dept) > 35:
+                print("Department name is too long. Please try again.")
+                continue
+            
             std = student(name, roll, email, dept)
-
             std.add_student(JSON_FILE)
         
         elif choice == 2:
@@ -63,12 +90,18 @@ def main():
             std_details.view_students(JSON_FILE)
         
         elif choice == 3:
+            # search_student
             try:
                 roll = int(input("Enter student roll to search: "))
             except ValueError:
                 print("Please enter a valid roll number.")
                 continue
-
+            if roll < 0:
+                print("Roll number cannot be negative. Please try again.")
+                continue
+            if roll > 99999:
+                print("Roll number is too large. Please try again.")
+                continue
             std_details = student_details()
             std_details.search_student(roll, JSON_FILE)
         
@@ -79,6 +112,13 @@ def main():
             except ValueError:
                 print("Please enter a valid roll number.")
                 continue
+            if roll < 0:
+                print("Roll number cannot be negative. Please try again.")
+                continue
+            if roll > 99999:
+                print("Roll number is too large. Please try again.")
+                continue
+            
             std_details = student_details()
             std_details.remove_student(roll, JSON_FILE)
 
