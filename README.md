@@ -1,5 +1,6 @@
 <h1>Step 1. MENU </h1>
 Show:
+======== MENU ========
 1. Add Student
 2. View Students
 3. Search Student
@@ -44,3 +45,5 @@ User input:
 1. ValueError
 2. value range
 3. empty file
+<h1>Step 6. Exit </h1>
+1. exit the program
